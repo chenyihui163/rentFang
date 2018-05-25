@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hss.renthouse.user.house.dao.HouseMapper">
+
+<!-- 修改房源状态 -->
+<update id="updateHouseStateByHid" parameterType="string">
+	update t_house
+	set
+		hstate = 1
+	where hid = #{hid}
+</update>
+<!-- 新增房源信息 -->
+<insert id="addHouse" parameterType="house">
+	insert into t_house
+	values
+	(
+		#{hid},
+		#{hname}, #{hmethod},
+		#{hprice}, #{htype}, 
+		#{harea}, #{hmodel}, 
+		#{hpaytype}, #{htoward}, 
+		#{hfloor}, #{hposition}, 
+		#{hsubway}, #{hstate}, 
+		#{htele}, #{hdesc}, 
+		#{himg}, #{hbelong}
+	)
+</insert>
+	<!-- 更新房源信息 -->
+	<update id="updateHouseByHid" parameterType="house">
+		update t_house
+		set
+			hname = #{hname}, hmethod = #{hmethod}, 
+			hprice = #{hprice}, htype = #{htype}, 
+			harea = #{harea}, hmodel = #{hmodel}, 
+			hpaytype = #{hpaytype}, htoward = #{htoward}, 
+			hfloor = #{hfloor}, hposition = #{hposition}, 
+			hsubway = #{hsubway}, hstate = #{hstate}, 
+			htele = #{htele}, hdesc = #{hdesc}, 
+			himg = #{himg}, hbelong = #{hbelong}
+		where hid = #{hid}
+	</update>
+	<!-- 上传房源图片 -->
+	<insert id="addImgs" parameterType="imgs">
+		insert into t_imgs 
+		values
+		(
+			#{iid}, #{iimg}, #{hid}
+		)
+	</insert>
+	<!-- 删除房源信息 -->
+	<delete id="delHouseByHid" parameterType="string">
+		delete from t_house where hid = #{hid}
+	</delete>
+	<!-- 删除房源的图片集 -->
+	<delete id="delAllImgsByHid" parameterType="string">
+		delete from t_imgs
+		where hid = #{hid}
+	</delete>
+	<!-- 业主加盟 -->
+	<insert id="joinHouse" parameterType="join">
+		insert into t_join
+		set
+		jid = #{jid},
+		jname = #{jname},
+		jtele = #{jtele},
+		jposition = #{jposition},
+		state = #{state},
+		jtime = #{jtime}
+	</insert>
+	<!-- 查询满足条件的房源 -->
+	<select id="queryHousesByCondition" parameterType="queryVo"
+		resultType="house">
+		select * from t_house
+		<where>
+			<if test="hid != '' and hid != null">
+				and hid = #{hid}
+			</if>
+			<if test="hname != '' and hname != null">
+				and hname = #{hname}
+			</if>
+			<if test="hsubway != '' and hsubway != null">
+				and hsubway LIKE '%${hsubway}%'
+			</if>
+			<if test="hmodel != '' and hmodel != null">
+				and hmodel LIKE '%${hmodel}%'
+			</if>
+			<if test="htype != '' and htype != null">
+				and htype = #{htype}
+			</if>
+			<if test="hmethod != '' and hmethod != null">
+				and hmethod = #{hmethod}
+			</if>
+			<if test="hposition != '' and hposition != null">
+				and hposition LIKE '%${hposition}%'
+			</if>
+			<if test="lprice != '' and lprice != null">
+				and hprice &gt;= #{lprice}
+			</if>
+			<if test="hpric != '' and hpric != null">
+				and hprice &lt; #{hpric}
+			</if>
+			<if test="searchVal != null and searchVal != ''">
+				and hid LIKE '%浦东%' || hname LIKE '%浦东%'
+				|| hsubway LIKE
+				'%浦东%' || hmodel LIKE '%浦东%'
+				|| htype LIKE '%浦东%' || hmethod LIKE
+				'%浦东%' || hposition LIKE '%浦东%'
+			</if>
+			<if test="method != null and method == 1">
+				and hstate = '0'
+			</if>
+		</where>
+		ORDER BY hprice asc
+		limit #{x}, #{y}
+	</select>
+	<!-- 查询条件下的总数量 -->
+	<select id="getCountByCondition" parameterType="queryVo"
+		resultType="integer">
+		select count(*) from t_house
+		<where>
+			<if test="hid != '' and hid != null">
+				and hid = #{hid}
+			</if>
+			<if test="hname != '' and hname != null">
+				and hname = #{hname}
+			</if>
+			<if test="hsubway != '' and hsubway != null">
+				and hsubway LIKE '%${hsubway}%'
+			</if>
+			<if test="hmodel != '' and hmodel != null">
+				and hmodel LIKE '%${hmodel}%'
+			</if>
+			<if test="htype != '' and htype != null">
+				and htype = #{htype}
+			</if>
+			<if test="hmethod != '' and hmethod != null">
+				and hmethod = #{hmethod}
+			</if>
+			<if test="hposition != '' and hposition != null">
+				and hposition LIKE '%${hposition}%'
+			</if>
+			<if test="lprice != '' and lprice != null">
+				and hprice &gt;= #{lprice}
+			</if>
+			<if test="hpric != '' and hpric != null">
+				and hprice &lt; #{hpric}
+			</if>
+			<if test="searchVal != null and searchVal != ''">
+				and hid LIKE '%浦东%' || hname LIKE '%浦东%'
+				|| hsubway LIKE
+				'%浦东%' || hmodel LIKE '%浦东%'
+				|| htype LIKE '%浦东%' || hmethod LIKE
+				'%浦东%' || hposition LIKE '%浦东%'
+			</if>
+			<if test="method != null and method == 1">
+				and hstate = '0'
+			</if>
+		</where>
+		ORDER BY hprice asc
+	</select>
+	<!-- 增加预约 -->
+	<insert id="addAppoint" parameterType="appoint">
+		insert into t_appoint
+		set
+		aid = #{aid}, aname= #{aname},
+		atele = #{atele}, antime = #{antime},
+		atime = #{atime}, state = #{state},
+		hid = #{hid},uid = #{uid}
+	</insert>
+	<!-- 查找指定房子的图片 -->
+	<select id="getAllImgsByHid" parameterType="string" resultType="imgs">
+		select iid, iimg from t_imgs where hid = #{hid}
+	</select>
+	<!-- 查找指定的房子 -->
+	<select id="queryHouseByHid" parameterType="string" resultType="house">
+		select * from t_house where hid = #{hid}
+	</select>
+	<!-- 查询房源房源，首页展示 -->
+	<select id="queryHouses" resultType="house">
+		select * from t_house
+		where hstate = 0
+		limit 0, 6
+	</select>
+</mapper> 

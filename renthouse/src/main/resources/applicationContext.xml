@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/util 
+		http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+	<!-- 加载连接数据库的相关属性 -->
+	<context:property-placeholder location="classpath:db.properties" />
+	
+	<!-- 配置数据源datasource -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="maxActive" value="10" />
+		<property name="maxIdle" value="5" />
+	</bean>
+
+	<!-- 整合myBatis -->
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 注入数据源 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 指定myBatis的核心配置文件的位置 -->
+		<property name="configLocation" value="classpath:mybatis.xml" />
+	</bean>
+
+	<!-- 指定myBatis的映射配置文件的位置，这里映射配置文件采用注解 的方式 -->
+	<!-- Invalid bound statement (not found) 如何报找不到service层的某个方法，value需要精确到dao包下-->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 扫描mapper文件位置 -->
+		<property name="basePackage" value="com.hss.renthouse.user.user.dao
+											,com.hss.renthouse.user.house.dao
+											,com.hss.renthouse.admins.admin.dao,
+											,com.hss.renthouse.admins.Log.dao
+											,com.hss.renthouse.admins.appoint.dao
+											,com.hss.renthouse.admins.contract.dao
+											,com.hss.renthouse.admins.renter.dao
+											,com.hss.renthouse.admins.rental.dao
+											,com.hss.renthouse.admins.bill.dao" />
+	</bean>
+
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- 开启注解事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<bean id="taskExecutor"   
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">  
+		<property name="corePoolSize" value="5" />  
+		<property name="maxPoolSize" value="10" />  
+		<property name="waitForTasksToCompleteOnShutdown" value="true" />  
+	</bean>  
+</beans>

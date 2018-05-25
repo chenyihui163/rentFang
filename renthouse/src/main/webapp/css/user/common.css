@@ -1,0 +1,31 @@
+.top{
+    height: 70px;
+}
+.top .top_title{
+    color:#3dbcc6;
+}
+.top .top_btn button{
+    color:#3dbcc6;
+    border-color: #3dbcc6;
+    font-size: 10px;
+    position: absolute;
+    bottom: -6px;
+    height: 25px;
+}
+.top .nav_top{
+    height: 70px;
+}
+.top .nav_top li{
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.footer{
+    height: 120px;
+}
+.footer .foot_title{
+    color:#3dbcc6;
+}
+.footer .foot_adver{
+    font-size: 16px;
+}

@@ -1,0 +1,27 @@
+.slide_div{
+    height: 500px;
+}
+.img_slide{
+	width:1265px;
+}
+.h_price{
+    color: grey;
+}
+.img_div{
+	height: 380px;
+}
+.h_img:hover{
+    border:2px solid grey;
+}
+.price{
+    color: red;
+    font-size: 22px;
+}
+.h_position{
+    color: #0b0b0b;
+    font-size: 16px;
+}
+.h_tran{
+    color:grey;
+    font-size: 14px;
+}

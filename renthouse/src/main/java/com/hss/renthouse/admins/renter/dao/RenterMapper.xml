@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hss.renthouse.admins.renter.dao.RenterMapper">
+	<!-- 删除指定的租客 -->
+	<delete id="delRenterByCid" parameterType="string">
+		delete from t_renter where cid = #{cid}
+	</delete>
+	<!-- 查找指定租客 -->
+	<select id="queryRenterByCid" parameterType="string" resultType="renter">
+		select * from t_renter where cid = #{cid}
+	</select>
+	<!-- 查询所有租客 -->
+	<resultMap type="renter" id="getRentersResultMap">
+		<id column="rid" property="rid" />
+		<association property="user" javaType="user">
+			<id column="uid" property="uid" />
+			<result column="uname" property="uname" />
+		</association>
+		<association property="house" javaType="house">
+			<id column="hid" property="hid" />
+			<result column="hposition" property="hposition" />
+		</association>
+		<association property="contract" javaType="contract">
+			<id column="cid" property="cid" />
+			<result column="cname" property="cname" />
+			<result column="ctele" property="ctele" />
+			<result column="cstime" property="cstime" />
+			<result column="cmoney" property="cmoney" />
+		</association>
+	</resultMap>
+	<select id="queryAllRenters" parameterType="bQueryVo" resultMap="getRentersResultMap">
+		select
+		r.rid, u.uid, u.uname, c.cname, c.ctele, h.hid, h.hposition,
+		c.cstime, c.cid, c.cmoney
+		from t_renter r
+		inner join t_user u on r.uid = u.uid
+		inner join t_house h on r.hid = h.hid
+		inner join t_contract c on r.cid
+		= c.cid
+		<where>
+			<if test="cstime != null and cstime != '' ">
+				and c.cstime &lt; #{cstime}
+			</if>
+			<if test="cname != null and cname != '' ">
+				and c.cname = #{cname}
+			</if>
+			<if test="ctele != null and ctele != '' ">
+				and c.ctele = #{ctele}
+			</if>
+			<if test="uname != null and uname != '' ">
+				and u.uname = #{uname}
+			</if>
+			<if test="cid != null and cid != '' ">
+				and c.cid = #{cid}
+			</if>
+			<if test="hposition != null and hposition != '' ">
+				and h.hposition LIKE '%${hposition}%'
+			</if>
+		</where>
+		order by
+		#{sort}
+		#{sortOrder}
+		limit #{offset}, #{ps}
+	</select>
+
+	<!-- 查询租客总数 -->
+	<select id="queryRentersTotal" resultType="integer">
+		select count(*) from
+		t_renter r
+		inner join t_user u on r.uid = u.uid
+		inner join t_house h on r.hid = h.hid
+		inner join t_contract c on r.cid
+		<where>
+			<if test="cstime != null and cstime != '' ">
+				and c.cstime &lt; #{cstime}
+			</if>
+			<if test="cname != null and cname != '' ">
+				and c.cname = #{cname}
+			</if>
+			<if test="ctele != null and ctele != '' ">
+				and c.ctele = #{ctele}
+			</if>
+			<if test="uname != null and uname != '' ">
+				and u.uname = #{uname}
+			</if>
+			<if test="cid != null and cid != '' ">
+				and c.cid = #{cid}
+			</if>
+			<if test="hposition != null and hposition != '' ">
+				and h.hposition LIKE '%${hposition}%'
+			</if>
+		</where>
+	</select>
+
+	<!-- 增加新租客 -->
+	<insert id="addRenter" parameterType="renter">
+		insert into t_renter
+		values
+		(
+		#{rid}, #{uid}, #{hid}, #{cid}
+		)
+	</insert>
+</mapper> 

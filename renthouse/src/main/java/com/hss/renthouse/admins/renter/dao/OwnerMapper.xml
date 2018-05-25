@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hss.renthouse.admins.renter.dao.OwnerMapper">
+	<!-- 删除房东信息 -->
+	<delete id="delOwnerByCid" parameterType="string">
+		delete from t_owner
+		where cid = #{cid}
+	</delete>
+	<!-- 修改房东信息 -->
+	<update id="updateOwnerByOid" parameterType="owner">
+		update t_owner
+		set
+		cid = #{cid}
+		where
+		oid = #{oid}
+	</update>
+	<!-- 统计房东总数 -->
+	<select id="queryOwnersTotal" parameterType="bQueryVo"
+		resultType="integer">
+		select count(*) from t_owner
+		<where>
+			<if test="cname != null and cname != '' ">
+				and oname = #{cname}
+			</if>
+			<if test="ctele != null and ctele != '' ">
+				and otele = #{otele}
+			</if>
+		</where>
+	</select>
+	<!-- 查询所有房东信息 -->
+	<select id="queryAllOwners" parameterType="bQueryVo" resultType="owner">
+		select * from t_owner
+		<where>
+			<if test="cname != null and cname != '' ">
+				and oname = #{cname}
+			</if>
+			<if test="ctele != null and ctele != '' ">
+				and otele = #{ctele}
+			</if>
+		</where>
+		order by
+		#{sort}
+		#{sortOrder}
+		limit #{offset}, #{ps}
+	</select>
+	<!-- 新增房东信息 -->
+	<insert id="addOwner" parameterType="owner">
+		insert into t_owner
+		values
+		(
+		#{oid}, #{oname}, #{otele}, #{hid}, #{cid}
+		)
+	</insert>
+</mapper> 

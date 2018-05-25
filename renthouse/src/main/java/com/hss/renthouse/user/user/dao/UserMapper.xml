@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hss.renthouse.user.user.dao.UserMapper">
+	<!-- 查询用户对应得房源合同租客总数 -->
+	<select id="queryContractsAndHouseAndRenterTotal" parameterType="bQueryVo"
+		resultType="integer">
+		select count(*)
+		from t_user u
+		left join t_contract c on u.uid = c.uid
+		inner join t_renter r on c.cid = r.cid
+		where u.uid = #{uid}
+		<if test="search != null and search != '' ">
+			and cname = #{search} || c.ctele = #{search} || c.cid = #{search} || r.rid = #{search} || c.hid = #{search}
+		</if>
+	</select>
+	<!-- 查询用户对应得房源合同租客 -->
+	<select id="queryContractsAndHouseAndRenters" parameterType="bQueryVo" resultType="contractsAndHouseAndRenter">
+		select DISTINCT u.uid, c.cid, c.cname, c.ctele, c.hid, r.rid
+		from t_user u
+		left join t_contract c on u.uid = c.uid
+		inner join t_renter r on c.cid = r.cid
+		where u.uid = #{uid}
+		<if test="search != null and search != '' ">
+			and cname = #{search} || c.ctele = #{search} || c.cid = #{search} || r.rid = #{search} || c.hid = #{search}
+		</if>
+		order by
+		#{sort}
+		#{sortOrder}
+		limit #{offset}, #{ps}
+	</select>
+	<!-- 查询用户总数 -->
+	<select id="queryUsersTotal" parameterType="bQueryVo"
+		resultType="integer">
+		select count(*) from t_user u
+		<where>
+			<if test="uname != null and uname != '' ">
+				and u.uname = #{uname}
+			</if>
+			<if test="ctele != null and ctele != '' ">
+				and u.utele = #{ctele}
+			</if>
+		</where>
+	</select>
+	<select id="queryUsers" parameterType="bQueryVo" resultType="user">
+		select DISTINCT u.*
+		from t_user u
+		<where>
+			<if test="uname != null and uname != '' ">
+				and u.uname = #{uname}
+			</if>
+			<if test="ctele != null and ctele != '' ">
+				and u.utele = #{ctele}
+			</if>
+		</where>
+		order by
+		#{sort}
+		#{sortOrder}
+		limit #{offset}, #{ps}
+	</select>
+	<!-- 更新用户信息 -->
+	<update id="updateUser" parameterType="user">
+		update t_user
+		set
+		uname =
+		#{uname}, utele = #{utele},
+		upasswd = #{upasswd}, uemail = #{uemail}
+		where uid = #{uid}
+	</update>
+	<!-- 用户注册 -->
+	<insert id="regist" parameterType="user">
+		insert into t_user(uid, uname,
+		upasswd, utele, uemail)
+		values
+		(#{uid}, #{uname}, #{upasswd}, #{utele},
+		#{uemail})
+	</insert>
+
+	<!-- 根据电话号码和密码查找用户 -->
+	<select id="getUserByUteleAndUpasswd" parameterType="user"
+		resultType="user">
+		select * from t_user where utele = #{utele} and upasswd =
+		#{upasswd}
+	</select>
+	<!-- 校验电话号码是否被注册 -->
+	<select id="checkTelephoneIsExist" parameterType="string"
+		resultType="integer">
+		select count(*) from t_user where utele = #{utele}
+	</select>
+
+</mapper>

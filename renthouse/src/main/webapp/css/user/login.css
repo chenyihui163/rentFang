@@ -1,0 +1,15 @@
+.content{
+    background-color: #f5f6ef;
+    /*height: 840px;*/
+}
+.content .content_login{
+    background-color: white;
+    margin-top: 35px;
+}
+.content .img{
+    width: 95%;
+}
+.content .login_title{
+    font-size: 24px;
+    color:#3dbcc6;
+}

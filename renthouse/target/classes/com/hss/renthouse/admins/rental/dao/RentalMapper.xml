@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hss.renthouse.admins.rental.dao.RentalMapper">
+
+	<!-- 根据账单编码查找对应的租金信息 -->
+	<select id="queryRentalByBId" parameterType="string" resultType="rental">
+		select DISTINCT m.* from t_bill b 
+		inner join t_renter r on b.rid = r.rid 
+		inner join t_rental m on m.cid = r.cid 
+		where b.bid = #{bid}
+	</select>
+	<!-- 刪除指定的租金 -->
+	<delete id="delRentalByCid" parameterType="string">
+		delete from t_rental where cid = #{cid}
+	</delete>
+	<!-- 修改租金信息 -->
+	<update id="updateRentalByMid" parameterType="rental">
+		update t_rental set
+		mptime = #{mptime}, mtime = #{mtime}, mntime = #{mntime}
+		where mid = #{mid}
+	</update>
+	<!-- 修改租金信息 -->
+	<update id="updateRental" parameterType="rental">
+		update t_rental set
+		mprice = #{mprice}, mstime = #{mstime}, mname = #{mname}, mtele =
+		#{mtele}
+		where cid = #{cid}
+	</update>
+	<!-- 查询所有租金 -->
+	<resultMap type="rental" id="getRentalsResultMap">
+		<id column="mid" property="mid" />
+		<result column="uid" property="uid" />
+		<result column="mname" property="mname" />
+		<result column="mtele" property="mtele" />
+		<result column="mptime" property="mptime" />
+		<result column="mstime" property="mstime" />
+		<result column="mtime" property="mtime" />
+		<result column="mntime" property="mntime" />
+		<result column="mprice" property="mprice" />
+		<result column="cid" property="cid" />
+		<association property="user" javaType="user">
+			<id column="uid" property="uid" />
+			<result column="uname" property="uname" />
+		</association>
+	</resultMap>
+	<select id="queryAllRentals" parameterType="bQueryVo" resultMap="getRentalsResultMap">
+		select r.mid, r.mname, r.mtele,
+		r.mptime, r.mstime, r.mtime, r.mntime,
+		r.mprice, r.cid, u.uid, u.uname 
+		from t_rental r
+		inner join t_user u on r.uid = u.uid
+		<where>
+			<if test="mtime != null and mtime != '' ">
+				and r.mtime &lt; #{mtime}
+			</if>
+			<if test="cname != null and cname != '' ">
+				and r.mname = #{cname}
+			</if>
+			<if test="uname != null and uname != '' ">
+				and u.uname = #{uname}
+			</if>
+			<if test="uid != null and uid != '' ">
+				and u.uid = #{uid}
+			</if>
+			<if test="state == 0 ">
+				and r.mtime = ''
+			</if>
+			<if test="state == 1 ">
+				and r.mtime != ''
+			</if>
+			<if test="cid != null and cid != '' ">
+				and r.cid = #{cid}
+			</if>
+		</where>
+		order by
+		#{sort}
+		#{sortOrder}
+		limit
+		#{offset}, #{ps}
+	</select>
+	<!-- 查询租金总数 -->
+	<select id="queryRentalsTotal" resultType="integer">
+		select count(*)
+		from t_rental r
+		inner join t_user u on r.uid = u.uid
+		<where>
+			<if test="mtime != null and mtime != '' ">
+				and r.mtime &lt; #{mtime}
+			</if>
+			<if test="cname != null and cname != '' ">
+				and r.mname = #{cname}
+			</if>
+			<if test="cid != null and cid != '' ">
+				and r.cid = #{cid}
+			</if>
+		</where>
+	</select>
+
+	<!-- 新增租金记录 -->
+	<insert id="addRental" parameterType="rental">
+		insert into t_rental
+		values
+		(
+		#{mid}, #{mname}, #{mtele}, #{mptime}, #{mstime}, #{mtime},
+		#{mntime},
+		#{mprice}, #{uid}, #{cid}
+		)
+	</insert>
+</mapper> 

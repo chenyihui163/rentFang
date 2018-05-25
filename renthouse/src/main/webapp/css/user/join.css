@@ -1,0 +1,19 @@
+.joinimg{
+    background: url("../../img/user/img_join.png") no-repeat;
+    height: 590px;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+.jointitle{
+    margin-top: 0px;
+    padding-top: 180px;
+}
+.title{
+    font-size: 50px;
+    color:black;
+}
+.text{
+    color:black;
+    font-size: 30px;
+}

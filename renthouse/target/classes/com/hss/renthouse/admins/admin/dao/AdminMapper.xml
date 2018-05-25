@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hss.renthouse.admins.admin.dao.AdminMapper">
+
+	<!-- 删除指定数据 -->
+	<delete id="delAdminByid" parameterType="string">
+		delete from t_admin where aid = #{id}
+	</delete>
+	<!-- 新增管理员 -->
+	<insert id="addAdmin" parameterType="admin">
+		insert into t_admin(aid, aname, apasswd, isAdmin) 
+		values
+		(
+			#{aid},
+		 	#{aname}, 
+		 	#{apasswd}, 
+		 	#{isAdmin}
+		 )
+	</insert>
+	<!-- 查询条件下的用户 -->
+	<select id="queryAdmins" parameterType="bQueryVo" resultType="admin">
+		select aid, aname,
+		CASE isAdmin WHEN 0 THEN '超级管理员' ELSE '普通管理员' END as arole
+		from t_admin
+		order by #{sort} #{sortOrder}
+		limit #{offset}, #{ps}
+	</select>
+	<!-- 查询用户总数 -->
+	<select id="queryAdminsTotal" resultType="integer">
+		select count(*) from
+		t_admin
+	</select>
+	<!-- 管理员登陆 -->
+	<select id="adminLogin" parameterType="admin" resultType="admin">
+		select
+		* from t_admin where
+		aname = #{aname} and apasswd = #{apasswd}
+	</select>
+</mapper>

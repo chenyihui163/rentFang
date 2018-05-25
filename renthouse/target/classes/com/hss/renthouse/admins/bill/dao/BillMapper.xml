@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hss.renthouse.admins.bill.dao.BillMapper">
+	<!--查询本月未支付的客户 -->
+	<select id="queryUnPayRenters" parameterType="bQueryVO"
+		resultType="RenterBill">
+		select u.uname, u.utele, b.bprice, r.hid, r.cid 
+		from t_bill b INNER JOIN t_renter r on b.rid = r.rid 
+		inner JOIN t_user u on r.uid = u.uid
+		where b.bstate = '0' and DATE_FORMAT(btime,'%Y-%M') = DATE_FORMAT(NOW(),'%Y-%M');
+	</select>
+	<!--查询本月未支付的客户总数 -->
+	<select id="queryRenterBillsTotal" parameterType="bQueryVO"
+		resultType="integer">
+		select count(*)
+		from t_bill b INNER JOIN t_renter r on b.rid = r.rid 
+		inner JOIN t_user u on r.uid = u.uid
+		where b.bstate = '0' and DATE_FORMAT(btime,'%Y-%M') = DATE_FORMAT(NOW(),'%Y-%M');
+	</select>
+	<!-- 修改账单 -->
+	<update id="updateBill" parameterType="bill">
+		update t_bill
+		set
+		btime = #{btime}, bdue = #{bdue}, bprice = #{bprice}
+		where bid = #{bid}
+	</update>
+	<!-- 删除指定账单 -->
+	<delete id="delBillByBid" parameterType="string">
+		delete from t_bill where
+		bid = #{bid}
+	</delete>
+	<!-- 检查勾选的用户是否已经存在了本月账单 -->
+	<select id="checkSendBill" parameterType="string" resultType="bill">
+		select b.* from t_bill b inner join t_renter r on r.rid = b.rid
+		where
+		DATE_FORMAT(btime, "%Y-%m") = DATE_FORMAT(NOW(),"%Y-%m") and r.cid =
+		#{cid}
+	</select>
+	<!-- 查询指定租客下所有未缴清的账单 -->
+	<select id="queryBillByRid" parameterType="string" resultType="bill">
+		select * from t_bill where rid = #{rid} and bstate = 0
+	</select>
+	<!-- 更新账单状态 -->
+	<update id="updateStatus" parameterType="bill">
+		update t_bill set
+		bstate = #{bstate}, bpaytime = #{bpaytime}
+		where bid = #{bid}
+	</update>
+	<!-- 查询用户本月账单 -->
+	<select id="queryBillByUid" parameterType="string" resultType="bill">
+		select * from t_bill where DATE_FORMAT(btime, '%Y-%m') =
+		DATE_FORMAT(NOW(),
+		'%Y-%m') and bstate = '0' and uid = #{uid}
+	</select>
+	<!-- 查询所有租金 -->
+	<resultMap type="bill" id="getbillsResultMap">
+		<id column="bid" property="bid" />
+		<result column="btime" property="btime" />
+		<result column="bdue" property="bdue" />
+		<result column="bprice" property="bprice" />
+		<result column="isPay" property="isPay" />
+		<result column="bpaytime" property="bpaytime" />
+		<association property="user" javaType="user">
+			<id column="uid" property="uid" />
+			<result column="uname" property="uname" />
+			<result column="uemail" property="uemail" />
+		</association>
+	</resultMap>
+	<select id="queryAllBills" parameterType="bQueryVo" resultMap="getbillsResultMap">
+		SELECT
+		b.bid, b.btime, b.bdue, b.bprice,
+		case b.bstate
+		when 0 then '未支付'
+		else '已支付'
+		end as isPay, b.bpaytime,
+		u.uid, u.uname, u.uemail
+		from t_bill
+		b
+		inner join t_user u on b.uid = u.uid
+		inner join t_renter r on r.rid =
+		b.rid
+		<where>
+			<if test="uname != null and uname != '' ">
+				and u.uname = #{uname}
+			</if>
+			<if test="rname != null and rname != '' ">
+				and r.rname = #{rname}
+			</if>
+			<if test="uid != null and uid != '' ">
+				and u.uid = #{uid}
+			</if>
+			<if test="cid != null and cid != '' ">
+				and r.cid = #{cid}
+			</if>
+			<if test="state != null and state != ''">
+				and b.bstate = #{state}
+			</if>
+			<if test="mtime != null and mtime != ''">
+				and DATE_FORMAT(b.btime, "%Y-%m") = DATE_FORMAT(#{mtime},
+				"%Y-%m")
+			</if>
+		</where>
+		order by
+		#{sort}
+		#{sortOrder}
+		limit
+		#{offset}, #{ps}
+	</select>
+	<!-- 查询账单总数 -->
+	<select id="queryBillsTotal" resultType="integer" parameterType="bQueryVo">
+		select count(*) from t_bill b
+		inner join t_user u on b.uid = u.uid
+		inner join t_renter r on r.rid = b.rid
+		<where>
+			<if test="uname != null and uname != '' ">
+				and u.uname = #{uname}
+			</if>
+			<if test="rname != null and rname != '' ">
+				and r.rname = #{rname}
+			</if>
+			<if test="uid != null and uid != '' ">
+				and u.uid = #{uid}
+			</if>
+			<if test="cid != null and cid != '' ">
+				and r.cid = #{cid}
+			</if>
+			<if test="state != null and state != ''">
+				and b.bstate = #{state}
+			</if>
+			<if test="mtime != null and mtime != ''">
+				and DATE_FORMAT(b.btime, "%Y-%m") = DATE_FORMAT(#{mtime},
+				"%Y-%m")
+			</if>
+		</where>
+	</select>
+
+	<!-- 新增账单记录 -->
+	<insert id="addBill" parameterType="bill">
+		insert into t_bill
+		values
+		(
+		#{bid}, #{btime}, #{bprice}, #{bdue}, #{uid}, #{bstate}, #{bpaytime},
+		#{rid}
+		)
+	</insert>
+</mapper> 
