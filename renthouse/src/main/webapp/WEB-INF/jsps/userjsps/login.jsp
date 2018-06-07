@@ -9,7 +9,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>松子直租 | 登陆</title>
+    <title>CWH直租 | 登陆</title>
 
     <!--导入bootstrap css-->
     <link href="../js/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
@@ -35,7 +35,7 @@
     <div class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-4">
-            <img class="img" src="/renthouse/img/user/loginimg/login_img.png">
+            <img class="img" src="../../../img/user/loginimg/login_img.png">
         </div>
         <div class="col-sm-4 content_login">
             <div class="text-center">

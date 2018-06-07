@@ -8,7 +8,7 @@
         	<br>
             <ul class="list-unstyled list-inline">
                 <li>
-                    <span style="position: relative; font-size:28px">松 子 直 租</span>
+                    <span style="position: relative; font-size:28px">CWH 直 租</span>
                 </li>
                 <li style=""> |</li>
                 <li>
@@ -16,7 +16,7 @@
                     <div class="btn-group top_btn">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                            上海 <span class="caret"></span>
+                            肇庆市 <span class="caret"></span>
                         </button>
                     </div>
                 </li>

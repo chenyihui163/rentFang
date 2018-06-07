@@ -46,7 +46,7 @@
                 <div class="col-sm-2"></div>
                 <div class="col-sm-8">
                     <br>
-                    <span class="title">松子直租后台管理系统</span>
+                    <span class="title">CWH直租后台管理系统</span>
                     <br>
                     <br>
                     <div class="alert alert-warning alert-dismissible sr-only" role="alert" id="alert">

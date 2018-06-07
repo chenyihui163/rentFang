@@ -4,17 +4,17 @@
     <div class="row">
         <div class="col-sm-4 text-center foot_title">
             <br>
-            <p><span style="font-size:28px">松 子 直 租</span></p>
+            <p><span style="font-size:28px">CWH 直 租</span></p>
             <p><span class="foot_adver">租的省心  住的放心</span></p>
         </div>
         <div class="col-sm-8">
             <br>
             <p>
-                Copyright &copy; 2018.huangsongsong All rights reserved.
+                Copyright &copy; 2018.CWH All rights reserved.
                 <a target="_blank" href="#/"></a>
             </p>
             <p>
-                地址：东华理工大学皇家学院418号
+                地址：肇庆学院
             </p>
         </div>
     </div>

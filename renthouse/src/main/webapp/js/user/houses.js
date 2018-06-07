@@ -159,7 +159,7 @@ function postAjavGetData(value){
 					 
 					 html += "<div class='col-sm-4 col-xs-6 text-right'>";
 					 html += "<a href='/skipHouseDetailPage.action?hid=" + this.hid + "'>";
-					 html += "<img src='" + this.himg + "'>"
+					 html += "<img src='" + this.himg + "' style='width:90%'>"
 					 html += "</a>";
 					 html += "</div>";
 					 

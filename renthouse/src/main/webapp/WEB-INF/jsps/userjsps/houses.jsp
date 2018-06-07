@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>松子直租 | 条件查找</title>
+    <title>CWH直租 | 条件查找</title>
 
     <!--导入bootstrap css-->
     <link href="../js/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
@@ -41,7 +41,7 @@
                         <p class="shaixuan-tj floatLeft clearfix">
                             <span><a href="/">全部结果</a></span>
                             <i class="icon-angle-right"></i>
-                            <span><strong>"松子直租"</strong></span>
+                            <span><strong>"CWH直租"</strong></span>
                             <i class="icon-angle-right"></i>
                         </p>
                         <p id="sxbtn" class="shaixuan-btn clearfix"><span><em>收起筛选</em><i class="icon-angle-up"></i></span></p>
@@ -66,12 +66,13 @@
                             <dl class="relative clearfix" style="border-bottom:0">
                                 <dt class="floatLeft"><a href="/">位置：</a></dt>
                                 <dd class="floatLeft show-con">
-                                    <a href="/" class="">浦东新区</a>
-                                    <a href="/" class="">长宁区</a>
-                                    <a href="/" class="">松江区</a>
-                                    <a href="/" class="">青山湖区</a>
-                                    <a href="/" class="">新建区</a>
-                                    <a href="/" class="">西湖区</a>
+                                    <a href="/" class="">端州区</a>
+                                    <a href="/" class="">鼎湖区</a>
+                                    <a href="/" class="">高要区</a>
+                                    <a href="/" class="">广宁县</a>
+                                    <a href="/" class="">怀集县</a>
+                                    <a href="/" class="">封开县</a>
+                                    <a href="/" class="">德庆县</a>
                                 </dd>
                             </dl>
                             <dl class="relative clearfix" style="border-bottom:0">

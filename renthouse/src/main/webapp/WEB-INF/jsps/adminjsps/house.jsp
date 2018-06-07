@@ -8,7 +8,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>松子直租后台管理系统</title>
+<title>CWH直租后台管理系统</title>
 <!-- Bootstrap Styles-->
 <link href="../ht/assets/css/bootstrap.css" rel="stylesheet" />
 <!-- FontAwesome Styles-->
@@ -111,7 +111,7 @@
 						<div class="col-sm-6">
 							<div class="input-group">
 								<input type="text" style="height: 46px"
-									class="searchVal form-control btn-lg" placeholder="输入小区、地铁等">
+									class="searchVal form-control btn-lg" placeholder="输入小区、公交路线  等">
 								<span class="input-group-addon" id="basic-addon2"
 									style="background-color: #3dbcc6;"> <a
 									class="search btn-lg"
@@ -143,7 +143,7 @@
 								<br>
 								<div class="col-sm-6">
 									<a href="/admin/skipAdminHouseDetailPage.action?hid=${h.hid}"><img
-										class="h_img" src="${h.himg }"></a>
+										class="h_img" src="${h.himg }" style="width:100%"></a>
 								</div>
 
 								<div class="col-sm-6">
@@ -295,7 +295,7 @@
 
 							<div class="form-group">
 
-								<label for="hsubway" class="col-sm-2 control-label">地铁:</label>
+								<label for="hsubway" class="col-sm-2 control-label">公交路线:</label>
 								<div class="col-sm-4">
 									<input type="text" class="form-control" id="hsubway"
 										name="hsubway" value="${house.hsubway }"> <span

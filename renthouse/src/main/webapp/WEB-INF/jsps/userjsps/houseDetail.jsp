@@ -9,7 +9,7 @@
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>松子直租 | 房源详细</title>
+<title>CWH直租 | 房源详细</title>
 
 <link href="../js/jquery.datetimepicker.css" rel="stylesheet">
 <!--bootstrap css-->
@@ -38,7 +38,7 @@
 		<br>
 		<div class="row">
 			<ol class="breadcrumb">
-				<li><a href="/skipIndexPage.action">松子直租</a></li>
+				<li><a href="/skipIndexPage.action">CWH直租</a></li>
 				<li><a href="/skipHousesPage.action">我要找房</a></li>
 				<li class="">${h.hname }</li>
 			</ol>
@@ -64,11 +64,12 @@
 					<div class="carousel-inner" role="listbox">
 						<div class="item active slide_div">
 							<img src="${h.himg}" alt="..." style="width: 110%;">
+							${h.himg}
 							<div class="carousel-caption"></div>
 						</div>
 						<c:forEach var="img" items="${imgs }">
 							<div class="item slide_div">
-								<img style="width: 100%;" class="img_slide" src="${img.iimg }"
+								<img style="width: 100%;" class="img_slide" src="${h.himg}"
 									alt="...">
 								<div class="carousel-caption"></div>
 							</div>
@@ -119,7 +120,7 @@
 					</p>
 					<p>
 						<span id="htoward">朝向：${h.htoward }</span><span id="hposition">区域：${h.hposition }</span><span
-							id="hsubway">地铁：${h.hsubway }</span>
+							id="hsubway">公交路线：${h.hsubway }</span>
 					</p>
 				</address>
 				<div class="col-sm-6 col-xs-12">

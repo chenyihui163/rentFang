@@ -8,14 +8,14 @@
 	        <!--未登录显示-->
 	        <div class="col-sm-3 text-center">
 	        	<br>
-	            <span style="font-size:18px;">欢迎来到松子直租，请<a href="/skipLoginPage.action">登陆</a></span>
+	            <span style="font-size:18px;">欢迎来到CWH直租，请<a href="/skipLoginPage.action">登陆</a></span>
 	        	<br>
 	        	<br>
 	        </div>
         </c:if>
         <c:if test="${sessionScope.user != null}">
         	<div class="col-sm-3 text-center">
-        		<h5>欢迎光临寒舍~</h5>
+        		<h5>欢迎光临~</h5>
 	        </div>
 	        <!--登陆显示-->
 	        <div class="col-sm-8 text-right">

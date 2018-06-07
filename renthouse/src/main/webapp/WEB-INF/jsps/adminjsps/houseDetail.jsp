@@ -8,7 +8,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>松子直租后台管理系统</title>
+<title>CWH直租后台管理系统</title>
 <!-- Bootstrap Styles-->
 <link href="../ht/assets/css/bootstrap.css" rel="stylesheet" />
 <!-- FontAwesome Styles-->

@@ -8,7 +8,7 @@
 				class="icon-bar"></span> <span class="icon-bar"></span>
 		</button>
 		<a class="navbar-brand text-center"
-			href="/admin/skipAdminIndexPage.action"><strong>松子直租后台管理</strong></a>
+			href="/admin/skipAdminIndexPage.action"><strong>CWH直租后台管理</strong></a>
 
 		<div id="sideNav"></div>
 	</div>
