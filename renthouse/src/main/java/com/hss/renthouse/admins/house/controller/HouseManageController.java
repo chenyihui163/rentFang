@@ -74,6 +74,8 @@ public class HouseManageController {
 					String filename = picFile[i].getOriginalFilename();
 					String path = request.getServletContext().getRealPath(
 			                "/images/");
+			   System.out.println("路径"+path);
+
 					// 保存图片前先判断保存图片的文件夹是否存在
 					//File f = new File(savePath);
 					File filepath = new File(path);
