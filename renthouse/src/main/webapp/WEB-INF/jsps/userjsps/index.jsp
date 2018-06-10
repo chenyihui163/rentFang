@@ -9,7 +9,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>松子直租 | 首页</title>
+    <title>CWH直租 | 首页</title>
 
     <!--导入bootstrap css-->
     <link href="../js/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
@@ -85,7 +85,7 @@
             <div class="col-sm-3"></div>
             <div class="col-sm-6">
                 <div class="input-group">
-                    <input type="text" style="height: 46px" class="searchVal form-control btn-lg" placeholder="输入小区、地铁等">
+                    <input type="text" style="height: 46px" class="searchVal form-control btn-lg" placeholder="输入小区、公交路线等">
                     <span class="input-group-addon" id="basic-addon2" style="background-color: #3dbcc6;">
                         <a class="search btn-lg"
                            style="text-decoration: none;color: white">搜索</a>
@@ -134,7 +134,7 @@
                 <div class="col-sm-10 col-xs-10">
                     <br>
                     <h2><span style="font-weight: bold">精选房源</span>为你而选</h2>
-                    <h4>松子直租致力于为租户创造高品质生活而努力</h4>
+                    <h4>CWH直租致力于为租户创造高品质生活而努力</h4>
                     <br>
                 </div>
                 <div class="col-sm-2 col-xs-2 text-right">
@@ -153,7 +153,7 @@
             <div class="col-sm-10 col-xs-10">
                 <c:forEach var="h" items="${hs }">
 	                <div class="col-sm-4 col-xs-6 img_div">
-	                    <a href="/skipHouseDetailPage.action?hid=${h.hid }"><img class="h_img" src="${h.himg }"></a>
+	                    <a href="/skipHouseDetailPage.action?hid=${h.hid }"><img class="h_img" src="${h.himg }" style="width:100%"></a>
 	                    <br>
 	                    <br>
 	                    <span class="h_price"><span class="price">￥${h.hprice }</span>元/月</span>

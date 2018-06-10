@@ -8,7 +8,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>松子直租后台管理系统</title>
+<title>CWH直租后台管理系统</title>
 <!-- Bootstrap Styles-->
 <link href="../ht/assets/css/bootstrap.css" rel="stylesheet" />
 <!-- FontAwesome Styles-->
@@ -146,7 +146,7 @@
 								<label for="ccompany" class="col-sm-2 control-label">公司(甲方):</label>
 								<div class="col-sm-4">
 									<input type="text" class="form-control" id="ccompany"
-										name="ccompany" value="松子直租" readonly="readonly">
+										name="ccompany" value="CWH直租" readonly="readonly">
 								</div>
 
 								<label for="ccompanytele" class="col-sm-2 control-label">电话(甲方):</label>

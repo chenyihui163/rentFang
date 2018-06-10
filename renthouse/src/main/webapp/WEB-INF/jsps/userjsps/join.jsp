@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>松子直租 | 业主加盟</title>
+    <title>CWH直租 | 业主加盟</title>
 </head>
 <!--导入bootstrap css-->
 <link href="../js/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
@@ -32,7 +32,7 @@
                 <div class="jointitle">
                     <span class="title">开启全新的房屋托管模式</span>
                     <br>
-                    <span class="text">房屋交给松子直租，做省心房东</span>
+                    <span class="text">房屋交给CWH直租，做省心房东</span>
                     <br>
                     <br>
                     <button class="btn btn-lg btn-info" data-toggle="modal"

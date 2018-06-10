@@ -125,7 +125,7 @@
 				and hname = #{hname}
 			</if>
 			<if test="hsubway != '' and hsubway != null">
-				and hsubway LIKE '%${hsubway}%'
+				and hsubway LIKE '%${hbus}%'
 			</if>
 			<if test="hmodel != '' and hmodel != null">
 				and hmodel LIKE '%${hmodel}%'

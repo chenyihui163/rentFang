@@ -50,9 +50,8 @@ public class HouseManageController {
 	 */
 	@SystemControllerAnnotation(value = "增加房源信息")
 	@RequestMapping(value = "/admin/addHouse.action")
-	public String addHouse(House house, MultipartFile[] picFile, 
+	public String addHouse(HttpServletRequest request,House house, MultipartFile[] picFile, 
 			HttpSession session, RedirectAttributesModelMap model) {
-
 		String msg = "";
 
 		Admin admin = (Admin) session.getAttribute("admin");
@@ -70,28 +69,35 @@ public class HouseManageController {
 				// 遍历MultipartFile,对每张图片进行处理
 				for (int i= 0; i < picFile.length; i++) {
 					// 更换名字
-					String newName = UUIDUtil.getUuid() + "_" + picFile[i].getOriginalFilename();
-					String savePath = "D:\\img\\";
+					//String newName = UUIDUtil.getUuid() + "_" + picFile[i].getOriginalFilename();
+					//String savePath = "D:\\img\\";
+					String filename = picFile[i].getOriginalFilename();
+					String path = request.getServletContext().getRealPath(
+			                "/images/");
 					// 保存图片前先判断保存图片的文件夹是否存在
-					File f = new File(savePath);
-					if (!f.exists()) {
-						f.mkdir();
+					//File f = new File(savePath);
+					File filepath = new File(path);
+					System.out.println("文件地址："+filepath);
+					if (!filepath.exists()) {
+						filepath.mkdir();
 					}
 
 					// 保存
-					File target = new File(savePath, newName);
+					File target = new File(filepath,filename);
 					try {
 						picFile[i].transferTo(target);
 					} catch (Exception e) {
 						msg = "上传房源[" + house.getHid() + "]图片失败";
 					}
-					
-					if(i == 1){
-						house.setHimg("\\img\\" + newName);
-					}else{
-						// 将图片保存到数据库中
-						houseService.addImgs(house.getHid(), "\\img\\" + newName);
-					}
+					house.setHimg( "\\images\\" + filename);
+					//house.setHimg( filepath +"'\'"+ filename);
+					houseService.addImgs(house.getHid(), "\\images\\" + filename);
+//					if(i == 1){
+//						house.setHimg("\\img\\" + newName);
+//					}else{
+//						// 将图片保存到数据库中
+//						houseService.addImgs(house.getHid(), "\\img\\" + newName);
+//					}
 				}
 			}
 			
@@ -122,7 +128,7 @@ public class HouseManageController {
 	 */
 	@SystemControllerAnnotation(value = "更新房源信息")
 	@RequestMapping(value = "/admin/updateHouseByHid.action")
-	public String updateHouseByHid(House house, MultipartFile[] picFile, HttpSession session,
+	public String updateHouseByHid(HttpServletRequest request,House house, MultipartFile[] picFile, HttpSession session,
 			RedirectAttributesModelMap model) {
 
 		String msg = "";
@@ -139,7 +145,8 @@ public class HouseManageController {
 				for (MultipartFile m : picFile) {
 					// 更换名字
 					String newName = UUIDUtil.getUuid() + "_" + m.getOriginalFilename();
-					String savePath = "D:\\img\\";
+					String savePath = request.getServletContext().getRealPath(
+			                "/images/");
 					// 保存图片前先判断保存图片的文件夹是否存在
 					File f = new File(savePath);
 					if (!f.exists()) {
