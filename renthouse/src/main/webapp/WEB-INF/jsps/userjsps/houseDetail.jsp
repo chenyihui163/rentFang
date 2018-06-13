@@ -119,8 +119,7 @@
 							id="hfloor">楼层：${h.hfloor }</span>
 					</p>
 					<p>
-						<span id="htoward">朝向：${h.htoward }</span><span id="hposition">区域：${h.hposition }</span><span
-							id="hsubway">公交路线：${h.hsubway }</span>
+						<span id="htoward">朝向：${h.htoward }</span><span id="hposition">区域：${h.hposition }</span>
 					</p>
 				</address>
 				<div class="col-sm-6 col-xs-12">

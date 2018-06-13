@@ -98,32 +98,7 @@
     <br>
     <!--承诺与服务-->
     <div class="container-fluid" style="margin-left: 60px">
-        <div class="row">
-            <div class="col-sm-2 col-xs-4">
-                <img src="../img/user/propimg/adv_1.jpg">
-                <h4>原创设计</h4>
-            </div>
-            <div class="col-sm-2 col-xs-4">
-                <img src="../img/user/propimg/adv_2.jpg">
-                <h4>高档家具</h4>
-            </div>
-            <div class="col-sm-2 col-xs-4">
-                <img src="../img/user/propimg/adv_3.jpg">
-                <h4>环保装修</h4>
-            </div>
-            <div class="col-sm-2 col-xs-4">
-                <img src="../img/user/propimg/adv_4.jpg">
-                <h4>极速Wi-Fi</h4>
-            </div>
-            <div class="col-sm-2 col-xs-4">
-                <img src="../img/user/propimg/adv_5.jpg">
-                <h4>维修服务</h4>
-            </div>
-            <div class="col-sm-2 col-xs-4">
-                <img src="../img/user/propimg/adv_6.jpg">
-                <h4>保洁服务</h4>
-            </div>
-        </div>
+        
     </div>
 
     <!--好房推荐-->

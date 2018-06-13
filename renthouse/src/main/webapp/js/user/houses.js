@@ -166,7 +166,6 @@ function postAjavGetData(value){
 					 html += "<div class='col-sm-6 col-xs-6 text-left detail'>";
 					 html += "<br>";
 					 html += "<p><a href='/skipHouseDetailPage.action?hid="+ this.hid + "'><span class='title'>" + this.hname + " " + this.htoward + "" + "</span></a></p>";
-					 html += "<p><span>" + this.hsubway + "</span></p>";
 					 html += "<p><span>" + this.harea + "|" + this.hfloor +"|" + this.hmodel + "|" + this.htoward+ "<span class='type'>";
 					 
 					 if(this.hmethod === '0'){
